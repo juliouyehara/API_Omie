@@ -69,3 +69,4 @@ target/
 .env
 vault/*
 teste.py
+env.yaml
