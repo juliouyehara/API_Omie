@@ -70,3 +70,7 @@ target/
 vault/*
 teste.py
 env.yaml
+teste.csv
+teste_cliente.csv
+teste_vendedores.csv
+teste_movimentos.csv
