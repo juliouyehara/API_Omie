@@ -215,4 +215,3 @@ class Endpoint:
               lista.append(dict)
         df = pd.DataFrame(lista)
         df.to_csv('teste_categoria.csv')
-
