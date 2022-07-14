@@ -4,6 +4,7 @@ from config.catalog_config import CatalogConfig
 
 config = CatalogConfig()
 config.read()
+
 class Endpoint:
 
     def request_conta_a_receber(api_omie):
@@ -66,8 +67,8 @@ class Endpoint:
           "registros_por_pagina": 40,
           "apenas_importado_api": "N"
         }).json()
-
-        for i in range(r['total_de_paginas']):
+        print(r)
+        for i in range(r['total_de_registros']):
           dict = {}
           print(r['cadastro'][i])
           codigo_vendedor = (r['cadastro'][i]['codigo'])
@@ -76,8 +77,9 @@ class Endpoint:
                        'nome vendedor': nome_vendedor
                        })
           lista.append(dict)
-        df = pd.DataFrame(lista)
-        df.to_csv('teste_vendedores.csv')
+        return lista
+        # df = pd.DataFrame(lista)
+        # df.to_csv('teste_vendedores.csv')
 
 
 
@@ -108,8 +110,9 @@ class Endpoint:
                 'nome fantasia': nome_fantasia
               })
               lista.append(dict)
-        df = pd.DataFrame(lista)
-        df.to_csv('teste_cliente.csv')
+        return lista
+        # pd.DataFrame(lista)
+        # df.to_csv('teste_cliente.csv')
 
     def request_movimentos(api_omie):
 
@@ -156,19 +159,19 @@ class Endpoint:
               try:
                 dt_emissao = r['movimentos'][i]['detalhes']['dDtEmissao']
               except:
-                  dt_emissao = ''
+                  dt_emissao = '01/01/1000'
               try:
                 dt_pagamento = r['movimentos'][i]['detalhes']['dDtPagamento']
               except:
-                  dt_pagamento = ''
+                  dt_pagamento = '01/01/1000'
               try:
                 dt_previsao = r['movimentos'][i]['detalhes']['dDtPrevisao']
               except:
-                  dt_previsao = ''
+                  dt_previsao = '01/01/1000'
               try:
                 cod_cliente = r['movimentos'][i]['detalhes']['nCodCliente']
               except:
-                  dt_previsao = ''
+                  cod_cliente = 0
               try:
                 valor = r['movimentos'][i]['detalhes']['nValorTitulo']
               except:
@@ -187,8 +190,9 @@ class Endpoint:
                 'valor': valor
               })
               lista.append(dict)
-        df = pd.DataFrame(lista)
-        df.to_csv('teste_movimentos.csv')
+        return lista
+        # df = pd.DataFrame(lista)
+        # df.to_csv('teste_movimentos.csv')
 
     def request_categorias(api_omie):
 
@@ -213,5 +217,6 @@ class Endpoint:
                 'categoria': categoria
               })
               lista.append(dict)
-        df = pd.DataFrame(lista)
-        df.to_csv('teste_categoria.csv')
+        return lista
+        # df = pd.DataFrame(lista)
+        # df.to_csv('teste_categoria.csv')
